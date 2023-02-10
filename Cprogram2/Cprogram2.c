@@ -6,51 +6,117 @@
  */
 
 #include <stdio.h>
+#include <string.h>
+#include<stdlib.h>
+
+int a = 0;
+int occurences[50];
 
 void combinations(int arr[],int score, int index){
 	if(score < 0){
 		return;
 	}
 
+	int count[5] = {0,0,0,0,0};
+	char s1[20];
+	char s2[20];
+	char s3[20];
+	char s4[20];
+	char s5[20];
+
+
+
 	if(score == 0){
-		printf("\n\n");
+
 		for (int i = 0; i < index; i++){
-			if (i != index - 1){
-				if (arr[i] == 8){
-					printf("TD + 2pt, ");
+			if (arr[i] == 8){
+				count[0]++;
+			}
+			if (arr[i] == 7){
+				count[1]++;
+			}
+			if (arr[i] == 6){
+				count[2]++;
+			}
+			if (arr[i] == 3){
+				count[3]++;
+			}
+			if (arr[i] == 2){
+				count[4]++;
+			}
+		}
+
+
+
+
+
+
+		for (int i = 0; i < 5; i++){
+					if (i == 0){
+						sprintf(s1, "%d", count[0]);
+					}
+					if (i == 1){
+						sprintf(s2, "%d", count[1]);
+					}
+					if (i == 2){
+						sprintf(s3, "%d", count[2]);
+					}
+					if (i == 3){
+						sprintf(s4, "%d", count[3]);
+					}
+					if (i == 4){
+						sprintf(s5, "%d", count[4]);
+					}
+
 				}
-				if (arr[i] == 7){
-					printf("TD + FG, ");
-				}
-				if (arr[i] == 6){
-					printf("TD, ");
-				}
-				if (arr[i] == 3){
-					printf("FG, ");
-				}
-				if (arr[i] == 2){
-					printf("Safety, ");
-				}
-			}else{
-				if (arr[i] == 8){
-					printf("TD + 2pt \n");
-				}
-				if (arr[i] == 7){
-					printf("TD + FG\n");
-				}
-				if (arr[i] == 6){
-					printf("TD\n");
-				}
-				if (arr[i] == 3){
-					printf("FG\n");
-				}
-				if (arr[i] == 2){
-					printf("Safety\n");
-				}
+
+		strcat(s1, s2);
+		strcat(s1, s3);
+		strcat(s1, s4);
+		strcat(s1, s5);
+
+		int num = atoi(s1);
+
+
+		for(int i = 0; i < sizeof(occurences); i++){
+			if (occurences[i] == num){
+				return;
+			}
+		}
+
+		printf("\n");
+
+		occurences[a] = num;
+		a++;
+
+		for (int i =0; i < 5; i++){
+			if(i == 0){
+				printf("%d TD + 2pt,", count[i]);
+			}
+			if(i == 1){
+				printf(" %d TD + FG,", count[i]);
+			}
+			if(i == 2){
+				printf(" %d TD,", count[i]);
+			}
+			if(i == 3){
+				printf(" %d 3pt FG,", count[i]);
+			}
+			if(i == 4){
+				printf(" %d Safety", count[i]);
 			}
 
-
 		}
+
+
+
+
+
+
+
+
+
+
 		return;
 	}
 
@@ -92,7 +158,6 @@ int main(){
 		printf("\n\nEnter 0 to STOP");
 		printf("\n\nEnter the NFL score: ");
 		scanf("%d", &user);
-
 		combinations(combos, user, 0);
 
 
